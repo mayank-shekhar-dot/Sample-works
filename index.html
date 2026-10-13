@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Golden Shutter Photography | Wedding, Portrait & Fashion Photographer</title>
+<meta name="description" content="Luxury wedding, pre-wedding, portrait, event and fashion photography. Book a session or ask our AI assistant.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--sf:#111;--gold:#D6AD55;--iv:#F5F0E5;--bd:#2a2a2a;--serif:'Playfair Display',Georgia,serif;--sans:'Montserrat',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--iv);font:14px/1.7 var(--sans);overflow-x:hidden}
+a{color:inherit;text-decoration:none}h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.2}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.hdr{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 5vw;background:#000;border-bottom:1px solid var(--bd)}
+.brand{display:flex;align-items:center;gap:10px}.brand b{font:400 26px var(--serif);color:var(--gold)}
+.brand span{display:flex;flex-direction:column;font-size:11px;letter-spacing:.2em;line-height:1.2}.brand small{font-size:7px;letter-spacing:.3em;color:#aaa}
+nav{display:flex;gap:28px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}nav a:hover{color:var(--gold)}
+.burger{display:none;background:none;border:0;color:var(--gold);font-size:24px;cursor:pointer}
+.btn{display:inline-block;padding:11px 24px;font:500 12px var(--sans);border:1px solid var(--gold);cursor:pointer;transition:.3s;border-radius:2px}
+.gold{background:var(--gold);color:#000}.gold:hover{background:#e6c070}.out{background:transparent;color:var(--gold)}.out:hover{background:var(--gold);color:#000}.dark{background:#111;color:var(--iv);border-color:#111}
+.ph{background:var(--img),linear-gradient(135deg,#2a2112,#0a0a0a);background-size:cover;background-position:center}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden}
+.hero-img{position:absolute;inset:0 0 0 35%}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#050505 35%,transparent 75%)}
+.hero-txt{position:relative;z-index:2;padding:0 5vw;max-width:640px}
+.eye{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-size:clamp(36px,5.5vw,68px)}h1 em{color:var(--gold)}.sub{margin:22px 0;font-size:12px;color:#ccc}.row{display:flex;gap:14px;flex-wrap:wrap}
+.scroll{position:absolute;bottom:14px;left:50%;z-index:3;color:var(--gold);font-size:26px}
+.sec{padding:80px 5vw}.alt{background:var(--sf)}h2{font-size:clamp(26px,3.5vw,38px);margin-bottom:28px}.c{text-align:center}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}.filters button{background:none;border:1px solid var(--bd);color:var(--iv);padding:7px 16px;font:11px var(--sans);cursor:pointer;transition:.3s}
+.filters .on,.filters button:hover{border-color:var(--gold);color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.tile{position:relative;aspect-ratio:3/4;border:1px solid var(--bd);overflow:hidden;cursor:pointer;padding:0;color:var(--iv);text-align:left;background:none}
+.tile .ph{position:absolute;inset:0;transition:transform .6s}.tile:hover .ph{transform:scale(1.07)}
+.tile:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.85))}
+.tile span{position:absolute;left:12px;bottom:10px;z-index:2;font:15px var(--serif)}.tile.hide{display:none}
+.cards5,.t3{display:grid;gap:16px}.cards5{grid-template-columns:repeat(5,1fr)}.t3{grid-template-columns:repeat(3,1fr)}
+.cards5 article,blockquote{background:var(--bg);border:1px solid var(--bd);padding:26px 20px;transition:.3s}.cards5 article:hover,blockquote:hover{border-color:var(--gold)}
+.cards5 i{display:block;font-style:normal;color:var(--gold);font-size:26px;margin-bottom:10px}.cards5 h3{font-size:16px;margin-bottom:6px}.cards5 p{font-size:12px;color:#aaa}
+.cta{text-align:center;padding:90px 5vw;position:relative}.cta:before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.65)}.cta>*{position:relative}.cta p{margin:-8px auto 22px;max-width:520px;color:#ccc}
+blockquote cite{display:block;margin-top:14px;font-style:normal;font-weight:600}cite small{display:block;color:#888;font-weight:400}.note{font-size:11px;color:#888;margin:-14px 0 18px}
+.about{display:grid;grid-template-columns:1fr 1fr;padding:0;min-height:520px}.about-img{min-height:360px}.about-txt{background:var(--iv);color:#111;padding:60px 6vw}
+.about-txt p{margin-bottom:18px;max-width:46ch}.stats{display:flex;gap:30px;margin:26px 0 8px;font-size:11px}.stats b{display:block;font:400 28px var(--serif)}.dk{color:#777;margin:0 0 18px}
+.assist{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.chat{border:1px solid var(--gold);background:var(--sf);padding:18px;display:flex;flex-direction:column;gap:12px}.chat-hd{display:none}
+.msgs{height:230px;overflow:auto;display:flex;flex-direction:column;gap:8px}.m{max-width:85%;padding:9px 13px;border-radius:8px;font-size:13px;background:#1c1c1c}.m.me{align-self:flex-end;background:var(--gold);color:#000}.m.err{color:#e88}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips button{background:none;border:1px solid var(--bd);color:var(--iv);padding:6px 12px;font:11px var(--sans);cursor:pointer;border-radius:3px}.chips button:hover{border-color:var(--gold)}
+.cin{display:flex;gap:8px}.cin input{flex:1}#csend{width:42px;border-radius:50%;border:0;background:var(--gold);cursor:pointer}.fab{display:none}
+input,select,textarea{width:100%;background:#0b0b0b;border:1px solid var(--bd);color:var(--iv);padding:10px 12px;font:13px var(--sans);border-radius:2px}input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:0}
+.book{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-top:30px}form{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-size:11px;display:flex;flex-direction:column;gap:5px}.w{grid-column:1/-1}.hp{position:absolute;left:-9999px}
+.bad{border-color:#d66!important}.status{font-size:13px}.ok{color:#8c8}.er{color:#e88}#sub:disabled{opacity:.5}
+.quote{min-height:300px;position:relative;display:flex;align-items:flex-end;border:1px solid var(--bd)}.quote blockquote{background:rgba(0,0,0,.6);border:0;font:italic 18px var(--serif)}.quote cite{font:11px var(--sans);color:var(--gold)}
+footer{background:#000;border-top:1px solid var(--bd);padding:50px 5vw 20px}.fcols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}.fcols h4{font:600 12px var(--sans);margin-bottom:10px}.fcols a,.fcols p{display:block;font-size:12px;color:#aaa;margin-bottom:6px}.soc a{display:inline-block;margin-right:14px;color:var(--gold)}
+.fb{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:30px;padding-top:16px;border-top:1px solid var(--bd);font-size:11px;color:#888}.fb a{margin-left:14px}.top{border:1px solid var(--gold);border-radius:50%;width:32px;height:32px;display:grid;place-items:center;color:var(--gold)}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;gap:10px}.lb[hidden]{display:none}.lbimg{width:min(80vw,640px);aspect-ratio:3/4;max-height:85vh;border:1px solid var(--gold);transition:opacity .3s}
+.lb button{background:none;border:0;color:var(--gold);font-size:40px;cursor:pointer;padding:10px}#lbx{position:absolute;top:10px;right:16px}
+@media(max-width:900px){.burger{display:block}.hdr-cta{display:none}nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#000;padding:18px 5vw;gap:16px;border-bottom:1px solid var(--bd)}nav.open{display:flex}
+.hero-img{inset:0}.hero:after{background:linear-gradient(90deg,#050505 10%,rgba(5,5,5,.3))}.grid,.cards5{grid-template-columns:repeat(2,1fr)}.t3,.about,.assist,.book,.fcols{grid-template-columns:1fr}
+form{grid-template-columns:1fr}.assist .chat{position:fixed;z-index:60;right:12px;bottom:80px;left:12px;max-height:75vh;transform:translateY(120%);opacity:0;transition:.4s}.assist .chat.open{transform:none;opacity:1}.chat-hd{display:flex;justify-content:space-between}.chat-hd button{background:none;border:0;color:var(--iv);font-size:22px}
+.fab{display:grid;place-items:center;position:fixed;z-index:61;right:16px;bottom:16px;width:52px;height:52px;border-radius:50%;border:0;background:var(--gold);font-size:22px;cursor:pointer}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.row-cat{margin-bottom:36px}.row-cat.hide{display:none}.row-cat h3{font-size:20px;margin-bottom:12px}
+.sl{position:relative}.track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.track::-webkit-scrollbar{display:none}
+.track .tile{flex:0 0 clamp(170px,22vw,260px);scroll-snap-align:start}
+.ar{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid var(--gold);background:rgba(0,0,0,.7);color:var(--gold);font-size:22px;cursor:pointer}.ar.l{left:6px}.ar.r{right:6px}
+#chat{position:fixed;z-index:60;right:16px;bottom:150px;width:min(380px,calc(100vw - 32px));max-height:70vh;transform:translateY(20px) scale(.97);opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 40px #000}
+#chat.open{transform:none;opacity:1;pointer-events:auto}#chat .chat-hd{display:flex;justify-content:space-between;align-items:center;color:var(--gold)}.chat-hd button{background:none;border:0;color:var(--iv);font-size:24px;cursor:pointer}
+.fab{display:grid;place-items:center;position:fixed;z-index:61;right:16px;width:52px;height:52px;border-radius:50%;border:0;background:var(--gold);color:#000;font-size:22px;cursor:pointer;box-shadow:0 4px 16px #000}
+#fab{bottom:16px}.drive{bottom:80px;background:#111;color:var(--gold);border:1px solid var(--gold)}
+</style></head>
+<body>
+<header class="hdr"><a class="brand" href="#home"><b>GS</b><span>GOLDEN SHUTTER<small>PHOTOGRAPHY</small></span></a>
+<button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">&#9776;</button>
+<nav id="nav"><a href="#home">Home</a><a href="#portfolio">Portfolio</a><a href="#services">Services</a><a href="#about">About</a><a href="#" data-ai>AI Assistant</a><a href="#contact">Contact</a></nav>
+<a class="btn out hdr-cta" href="#contact">Book a Session</a></header>
+
+<main id="home">
+<section class="hero"><div class="ph hero-img" style="--img:url(https://picsum.photos/seed/aarav-hero/1400/900)" role="img" aria-label="Indian bride in traditional jewellery, low-key lighting"></div>
+<div class="hero-txt"><p class="eye">More than photos</p>
+<h1>We Capture Moments. <em>You Keep Them Forever.</em></h1>
+<p class="sub">Wedding · Portraits · Events · Fashion · Commercial · And More</p>
+<div class="row"><a class="btn gold" href="#portfolio">Explore Portfolio</a><a class="btn out" href="#contact">Book a Session</a></div></div>
+<a class="scroll" href="#portfolio" aria-label="Scroll down">&#8964;</a></section>
+
+<section class="sec" id="portfolio"><p class="eye">Our Portfolio</p><h2>Featured Work</h2>
+<div class="filters" role="group" aria-label="Filter portfolio">
+<button class="on" data-f="all">All</button><button data-f="wedding">Weddings</button><button data-f="portrait">Portraits</button><button data-f="pre">Pre-wedding</button><button data-f="event">Events</button><button data-f="fashion">Fashion &amp; Commercial</button></div>
+<div id="rows"></div></section>
+
+<section class="sec alt" id="services"><p class="eye">What we offer</p><h2>Our Services</h2>
+<div class="cards5">
+<article><i>&#9825;</i><h3>Wedding Photography</h3><p>From intimate ceremonies to grand celebrations.</p></article>
+<article><i>&#9734;</i><h3>Pre-wedding Shoots</h3><p>Tell your love story beautifully.</p></article>
+<article><i>&#9673;</i><h3>Portrait Photography</h3><p>Natural, elegant, timeless.</p></article>
+<article><i>&#9830;</i><h3>Event Photography</h3><p>Corporate, social and private events.</p></article>
+<article><i>&#10022;</i><h3>Fashion &amp; Commercial</h3><p>Brands, products, editorial.</p></article></div></section>
+
+<section class="cta ph" style="--img:url(https://picsum.photos/seed/aarav-banner/1400/500)"><h2>Let's Create Something Beautiful</h2>
+<p>Your story deserves to be captured. Book a session and let's bring your vision to life.</p><a class="btn gold" href="#contact">Book a Session</a></section>
+
+<section class="sec"><p class="eye">Kind words</p><h2>Client Testimonials</h2>
+<p class="note">Sample text — replace with genuine client reviews before launch.</p>
+<div class="t3">
+<blockquote><p>“Sample review: replace with a real client's words about their wedding experience.”</p><cite>Client Name<small>Wedding Client</small></cite></blockquote>
+<blockquote><p>“Sample review: replace with a real pre-wedding client's feedback.”</p><cite>Client Name<small>Pre-wedding Client</small></cite></blockquote>
+<blockquote><p>“Sample review: replace with a real event client's feedback.”</p><cite>Client Name<small>Event Client</small></cite></blockquote></div></section>
+
+<section class="sec about" id="about"><div class="ph about-img" style="--img:url(https://picsum.photos/seed/aarav-aarav/800/1000)" role="img" aria-label="Aarav Rana holding a camera"></div>
+<div class="about-txt"><h2>Hi, I'm Aarav Rana</h2>
+<p>I'm a passionate photographer, storyteller, and dreamer. For me, photography isn't just about taking pictures — it's about capturing emotions, preserving memories, and telling beautiful stories in every frame.</p>
+<div class="stats"><div><b data-edit>8+</b>Years of Experience</div><div><b data-edit>250+</b>Happy Clients</div><div><b data-edit>500+</b>Photos Delivered</div></div>
+<p class="note dk">Placeholder numbers — replace with verified figures.</p>
+<a class="btn dark" href="#contact">Learn More</a></div></section>
+
+<div class="chat" id="chat"><div class="chat-hd"><span>AI Assistant</span><button id="chatX" aria-label="Close chat">&times;</button></div>
+<div class="msgs" id="msgs" aria-live="polite"><div class="m bot">Hi! I'm your photography assistant. How can I help you today?</div></div>
+<div class="chips"><button>What are your wedding packages?</button><button>How do I book a pre-wedding shoot?</button><button>Which locations do you cover?</button><button>What details are needed for booking?</button></div>
+<div class="cin"><input id="cin" maxlength="500" placeholder="Type your question..." aria-label="Your question"><button id="csend" aria-label="Send">&#10148;</button></div></div>
+<button class="fab" id="fab" aria-label="Open AI assistant" title="AI Assistant">&#10022;</button>
+<a class="fab drive" href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" rel="noopener" aria-label="Open Google Drive photos" title="Google Drive">&#128193;</a>
+
+<section class="sec" id="contact"><h2 class="c">Book a Session / Get in Touch</h2><p class="c">Fill out the form below and I'll get back to you as soon as possible.</p>
+<div class="book"><form id="form" novalidate>
+<label>Full Name *<input name="name" required></label>
+<label>Phone / WhatsApp *<input name="phone" type="tel" required></label>
+<label>Email Address *<input name="email" type="email" required></label>
+<label>Photography Type *<select name="type" required><option value="">Select type</option><option>Wedding Photography</option><option>Pre-wedding Shoot</option><option>Portrait Photography</option><option>Event Photography</option><option>Fashion &amp; Commercial</option><option>Other</option></select></label>
+<label>Event Date<input name="date" type="date"></label>
+<label>Preferred Time<input name="time" type="time"></label>
+<label>Event Location<input name="location"></label>
+<label>Budget Range<input name="budget" placeholder="e.g. ₹50,000 – ₹1,00,000"></label>
+<label class="w">Additional Message<textarea name="message" rows="4" maxlength="1500"></textarea></label>
+<input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button type="submit" class="btn gold w" id="sub">Submit Enquiry</button><p class="w status" id="status" role="status"></p></form>
+<figure class="ph quote" style="--img:url(https://picsum.photos/seed/aarav-camera/600/800)"><blockquote>Good photos are not just pictures; they are connections with time.<cite>— Aarav Rana</cite></blockquote></figure></div></section>
+</main>
+
+<footer><div class="fcols"><div><a class="brand" href="#home"><b>GS</b><span>GOLDEN SHUTTER<small>PHOTOGRAPHY</small></span></a><p>Capturing real moments, creating lasting memories.</p>
+<p class="soc"><a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener">Instagram</a><a href="https://facebook.com/YOUR_PAGE" target="_blank" rel="noopener">Facebook</a><a href="https://youtube.com/@YOUR_CHANNEL" target="_blank" rel="noopener">YouTube</a></p></div>
+<div><h4>Quick Links</h4><a href="#home">Home</a><a href="#portfolio">Portfolio</a><a href="#services">Services</a><a href="#about">About</a><a href="#" data-ai>AI Assistant</a><a href="#contact">Contact</a></div>
+<div><h4>Contact Us</h4><p>[Phone number]</p><p>[Email address]</p><p>[Business location]</p></div></div>
+<div class="fb"><span>© 2026 Golden Shutter Photography.</span><span><a href="#">Privacy Policy</a> <a href="#">Terms &amp; Conditions</a></span><a class="top" href="#home" aria-label="Back to top">&uarr;</a></div></footer>
+<div class="lb" id="lb" hidden><button id="lbx" aria-label="Close">&times;</button><button id="lbp" aria-label="Previous">&#8249;</button><div class="lbimg" id="lbimg"></div><button id="lbn" aria-label="Next">&#8250;</button></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const nav=$('#nav'),bg=$('.burger');
+bg.onclick=()=>bg.setAttribute('aria-expanded',nav.classList.toggle('open'));
+nav.onclick=e=>e.target.tagName==='A'&&nav.classList.remove('open');
+// Gallery list — edit: [category, label, image file in /images]
+const CATS=[['wedding','Weddings'],['portrait','Portraits'],['pre','Pre-wedding'],['event','Events'],['fashion','Fashion & Commercial']];
+const P=CATS.flatMap(([k,l])=>[1,2,3,4,5].map(n=>[k,l,k+n]));
+const rows=$('#rows');let vis=[],cur=0;
+CATS.forEach(([k,l])=>{const idx=P.map((p,i)=>i).filter(i=>P[i][0]===k);const s=document.createElement('div');s.className='row-cat';s.dataset.c=k;
+s.innerHTML=`<h3>${l}</h3><div class="sl"><button class="ar l" aria-label="Previous">&#8249;</button><div class="track">${idx.map(i=>`<button class="tile" data-i="${i}" aria-label="Open ${l} photo"><div class="ph" style="--img:url(https://picsum.photos/seed/aarav-${P[i][2]}/600/800)"></div><span>${l}</span></button>`).join('')}</div><button class="ar r" aria-label="Next">&#8250;</button></div>`;rows.append(s)});
+$$('.filters button').forEach(b=>b.onclick=()=>{$$('.filters button').forEach(x=>x.classList.toggle('on',x===b));$$('.row-cat').forEach(r=>r.classList.toggle('hide',b.dataset.f!=='all'&&r.dataset.c!==b.dataset.f))});
+rows.onclick=e=>{const a=e.target.closest('.ar');if(a){const t=a.parentElement.querySelector('.track');t.scrollBy({left:(a.classList.contains('r')?1:-1)*t.clientWidth*.8,behavior:'smooth'});return}
+const t=e.target.closest('.tile');if(!t)return;vis=[...t.closest('.track').querySelectorAll('.tile')].map(x=>+x.dataset.i);lb.hidden=false;show(vis.indexOf(+t.dataset.i))};
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(()=>$$('.track').forEach(t=>{if(t.matches(':hover'))return;const end=t.scrollLeft+t.clientWidth>=t.scrollWidth-4;t.scrollTo({left:end?0:t.scrollLeft+t.clientWidth*.5,behavior:'smooth'})}),3500);
+const lb=$('#lb'),li=$('#lbimg');
+function show(n){cur=(n+vis.length)%vis.length;li.style.opacity=0;setTimeout(()=>{li.className='lbimg ph';li.style.setProperty('--img',`url(https://picsum.photos/seed/aarav-${P[vis[cur]][2]}/900/1200)`);li.setAttribute('role','img');li.setAttribute('aria-label',P[vis[cur]][1]+' photograph');li.style.opacity=1},150)}
+const close=()=>lb.hidden=true;$('#lbx').onclick=close;$('#lbp').onclick=()=>show(cur-1);$('#lbn').onclick=()=>show(cur+1);
+addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
+let sx=0;lb.ontouchstart=e=>sx=e.touches[0].clientX;lb.ontouchend=e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(cur+(d<0?1:-1))};
+const msgs=$('#msgs'),cin=$('#cin'),chat=$('#chat');let hist=[],busy=false;
+$('#fab').onclick=()=>chat.classList.toggle('open');$('#chatX').onclick=()=>chat.classList.remove('open');
+function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;msgs.append(d);msgs.scrollTop=1e9;return d}
+async function ask(q){q=q.trim();if(!q||busy)return;busy=true;add(q,'me');cin.value='';const w=add('Typing…','bot');
+try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,history:hist.slice(-6)})});
+const j=await r.json();if(!r.ok)throw 0;w.textContent=j.reply;hist.push({role:'user',text:q},{role:'model',text:j.reply})}
+catch{w.textContent='The assistant is unavailable right now. Please use the enquiry form below and we will reply soon.';w.classList.add('err')}busy=false}
+$('#csend').onclick=()=>ask(cin.value);cin.onkeydown=e=>e.key==='Enter'&&ask(cin.value);
+$$('.chips button').forEach(b=>b.onclick=()=>ask(b.textContent));
+const f=$('#form'),st=$('#status'),sub=$('#sub');
+f.onsubmit=async e=>{e.preventDefault();if(sub.disabled)return;let bad=0;
+$$('#form [required]').forEach(i=>{const v=i.value.trim();const ok=v&&(i.name!=='email'||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v))&&(i.name!=='phone'||/^[+\d][\d\s-]{8,14}$/.test(v));i.classList.toggle('bad',!ok);bad+=!ok});
+if(bad){st.className='w status er';st.textContent='Please fix the highlighted fields (valid email and phone are required).';return}
+sub.disabled=true;st.className='w status';st.textContent='Sending…';
+try{const r=await fetch('/api/enquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});
+if(!r.ok)throw 0;f.reset();st.className='w status ok';st.textContent='Enquiry received. This is not a confirmed booking — we will reply to confirm availability.'}
+catch{st.className='w status er';st.textContent='Could not send your enquiry. Please try again or contact us directly.'}sub.disabled=false};
+$$('[data-ai]').forEach(a=>a.onclick=e=>{e.preventDefault();chat.classList.add('open');nav.classList.remove('open')});
+</script></body></html>
