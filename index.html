@@ -222,8 +222,9 @@ const WED=`<h2>Wedding Photography – Pricing</h2>
 <li><b>Extra Videography</b>₹8,000 / Day</li>
 <li><b>Extra Photo Editing</b>₹100 / Pcs</li></ul>
 <p class="pn"><a class="btn gold" href="#contact" data-pc>Book a Session</a></p>`;
-const NOPR=n=>`<h2>${n} – Pricing</h2><p>Pricing for this service depends on your requirement (duration, location, deliverables). Please send an enquiry and we'll share a custom quote.</p><p class="pn"><a class="btn gold" href="#contact" data-pc>Get a Quote</a></p>`;
-const SV={wedding:WED,pre:NOPR('Pre-wedding Shoots'),portrait:NOPR('Portrait Photography'),event:NOPR('Event Photography'),fashion:NOPR('Fashion & Commercial')};
+const BODY=WED.replace(/^<h2>.*?<\/h2>/,'');
+const TTL={wedding:'Wedding Photography',pre:'Pre-wedding Shoots',portrait:'Portrait Photography',event:'Event Photography',fashion:'Fashion &amp; Commercial'};
+const SV=Object.fromEntries(Object.entries(TTL).map(([k,n])=>[k,`<h2>${n} – Pricing</h2>`+(k==='wedding'?'':`<p class="pn" style="margin:-14px 0 0">Standard packages are shown below. Final pricing for ${n} may vary with your requirement — send an enquiry for a custom quote.</p>`)+BODY]));
 const pm=$('#pm'),pmc=$('#pmc'),pmClose=()=>pm.hidden=true;
 const openPm=c=>{pmc.innerHTML=SV[c.dataset.s];pm.hidden=false;pm.scrollTop=0};
 $$('.svc').forEach(c=>{c.onclick=()=>openPm(c);c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPm(c)}}});
