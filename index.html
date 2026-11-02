@@ -119,10 +119,10 @@ form{grid-template-columns:1fr}.assist .chat{position:fixed;z-index:60;right:12p
 <blockquote><p>“Sample review: replace with a real pre-wedding client's feedback.”</p><cite>Client Name<small>Pre-wedding Client</small></cite></blockquote>
 <blockquote><p>“Sample review: replace with a real event client's feedback.”</p><cite>Client Name<small>Event Client</small></cite></blockquote></div></section>
 
-<section class="sec about" id="about"><div class="ph about-img" style="--img:url(https://picsum.photos/seed/aarav-aarav/800/1000)" role="img" aria-label="Aarav Rana holding a camera"></div>
-<div class="about-txt"><h2>Hi, I'm Aarav Rana</h2>
-<p>I'm a passionate photographer, storyteller, and dreamer. For me, photography isn't just about taking pictures — it's about capturing emotions, preserving memories, and telling beautiful stories in every frame.</p>
-<div class="stats"><div><b data-edit>8+</b>Years of Experience</div><div><b data-edit>250+</b>Happy Clients</div><div><b data-edit>500+</b>Photos Delivered</div></div>
+<section class="sec about" id="about"><div class="ph about-img" style="--img:url(https://mayank-shekhar-dot.github.io/Sample-works/suman.png)" role="img" aria-label="Suman holding a camera"></div>
+<div class="about-txt"><h2>Hi, I'm Suman</h2>
+<p>I'm a passionate photographe. For me, photography isn't just about taking pictures — it's about capturing emotions, preserving memories, and telling beautiful stories in every frame.</p>
+<div class="stats"><div><b data-edit>8+</b>Years of Experience</div><div><b data-edit>250+</b>Happy Clients</div><div><b data-edit>5000+</b>Photos Delivered</div></div>
 <p class="note dk">Placeholder numbers — replace with verified figures.</p>
 <a class="btn dark" href="#contact">Learn More</a></div></section>
 
@@ -162,18 +162,19 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const nav=$('#nav'),bg=$('.burger');
 bg.onclick=()=>bg.setAttribute('aria-expanded',nav.classList.toggle('open'));
 nav.onclick=e=>e.target.tagName==='A'&&nav.classList.remove('open');
-// Gallery list — edit: [category, label, image file in /images]
-const CATS=[['wedding','Weddings'],['portrait','Portraits'],['pre','Pre-wedding'],['event','Events'],['fashion','Fashion & Commercial']];
-const P=CATS.flatMap(([k,l])=>[1,2,3,4,5].map(n=>[k,l,k+n]));
+// Gallery list — [category key, label, file prefix]. Images: BASE + prefix + 1..10 + .jpeg
+const BASE='https://mayank-shekhar-dot.github.io/Sample-works/';
+const CATS=[['wedding','Weddings','Weeding'],['portrait','Portraits','P'],['pre','Pre-wedding','Pre'],['event','Events','E'],['fashion','Fashion & Commercial','O']];
+const P=CATS.flatMap(([k,l,f])=>Array.from({length:10},(_,i)=>[k,l,BASE+f+(i+1)+'.jpeg']));
 const rows=$('#rows');let vis=[],cur=0;
 CATS.forEach(([k,l])=>{const idx=P.map((p,i)=>i).filter(i=>P[i][0]===k);const s=document.createElement('div');s.className='row-cat';s.dataset.c=k;
-s.innerHTML=`<h3>${l}</h3><div class="sl"><button class="ar l" aria-label="Previous">&#8249;</button><div class="track">${idx.map(i=>`<button class="tile" data-i="${i}" aria-label="Open ${l} photo"><div class="ph" style="--img:url(https://picsum.photos/seed/aarav-${P[i][2]}/600/800)"></div><span>${l}</span></button>`).join('')}</div><button class="ar r" aria-label="Next">&#8250;</button></div>`;rows.append(s)});
+s.innerHTML=`<h3>${l}</h3><div class="sl"><button class="ar l" aria-label="Previous">&#8249;</button><div class="track">${idx.map(i=>`<button class="tile" data-i="${i}" aria-label="Open ${l} photo"><div class="ph" style="--img:url(${P[i][2]})"></div><span>${l}</span></button>`).join('')}</div><button class="ar r" aria-label="Next">&#8250;</button></div>`;rows.append(s)});
 $$('.filters button').forEach(b=>b.onclick=()=>{$$('.filters button').forEach(x=>x.classList.toggle('on',x===b));$$('.row-cat').forEach(r=>r.classList.toggle('hide',b.dataset.f!=='all'&&r.dataset.c!==b.dataset.f))});
 rows.onclick=e=>{const a=e.target.closest('.ar');if(a){const t=a.parentElement.querySelector('.track');t.scrollBy({left:(a.classList.contains('r')?1:-1)*t.clientWidth*.8,behavior:'smooth'});return}
 const t=e.target.closest('.tile');if(!t)return;vis=[...t.closest('.track').querySelectorAll('.tile')].map(x=>+x.dataset.i);lb.hidden=false;show(vis.indexOf(+t.dataset.i))};
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(()=>$$('.track').forEach(t=>{if(t.matches(':hover'))return;const end=t.scrollLeft+t.clientWidth>=t.scrollWidth-4;t.scrollTo({left:end?0:t.scrollLeft+t.clientWidth*.5,behavior:'smooth'})}),3500);
 const lb=$('#lb'),li=$('#lbimg');
-function show(n){cur=(n+vis.length)%vis.length;li.style.opacity=0;setTimeout(()=>{li.className='lbimg ph';li.style.setProperty('--img',`url(https://picsum.photos/seed/aarav-${P[vis[cur]][2]}/900/1200)`);li.setAttribute('role','img');li.setAttribute('aria-label',P[vis[cur]][1]+' photograph');li.style.opacity=1},150)}
+function show(n){cur=(n+vis.length)%vis.length;li.style.opacity=0;setTimeout(()=>{li.className='lbimg ph';li.style.setProperty('--img',`url(${P[vis[cur]][2]})`);li.setAttribute('role','img');li.setAttribute('aria-label',P[vis[cur]][1]+' photograph');li.style.opacity=1},150)}
 const close=()=>lb.hidden=true;$('#lbx').onclick=close;$('#lbp').onclick=()=>show(cur-1);$('#lbn').onclick=()=>show(cur+1);
 addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
 let sx=0;lb.ontouchstart=e=>sx=e.touches[0].clientX;lb.ontouchend=e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(cur+(d<0?1:-1))};
