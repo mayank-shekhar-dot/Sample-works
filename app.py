@@ -12,14 +12,14 @@ CHECK LOCALLY (in this order)
     4) python app.py           -> starts the website at http://localhost:5000
 
     Set the key first:
-      Windows PowerShell :  $env:GEMINI_API_KEY="your_key"
-      Mac / Linux        :  export GEMINI_API_KEY="your_key"
+      Windows PowerShell :  $env:GOLDEN_SHUTTER_API_KEY="your_key"
+      Mac / Linux        :  export GOLDEN_SHUTTER_API_KEY="your_key"
     Free key: https://aistudio.google.com/apikey  (the key stays on the server, never in index.html)
 
 DEPLOY (Render)
     Build command : pip install -r requirements.txt
     Start command : gunicorn app:app --timeout 120
-    Env variables : GEMINI_API_KEY (required), GEMINI_MODEL, ALLOWED_ORIGIN (optional)
+    Env variables : GOLDEN_SHUTTER_API_KEY (required), GEMINI_MODEL, ALLOWED_ORIGIN (optional)
     Region        : Singapore
 
 HOW TO EDIT: change BUSINESS and PRICING below, then restart the server.
@@ -93,7 +93,7 @@ OFF_TOPIC_REPLY = (
 # =====================================================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # .strip() removes accidental spaces / quotes (a very common reason for "API key not valid")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip().strip("\"'").strip()
+GOLDEN_SHUTTER_API_KEY = os.getenv("GOLDEN_SHUTTER_API_KEY", "").strip().strip("\"'").strip()
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite").strip() or "gemini-3.5-flash-lite"
 ACTIVE_MODEL = GEMINI_MODEL  # may switch automatically if Google retires the model above
 GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta"
@@ -186,7 +186,7 @@ def _build_contents(history, message):
 
 
 def _gemini_headers():
-    return {"Content-Type": "application/json", "x-goog-api-key": GEMINI_API_KEY}
+    return {"Content-Type": "application/json", "x-goog-api-key": GOLDEN_SHUTTER_API_KEY}
 
 
 _models_cache = {"at": 0.0, "names": []}
@@ -343,7 +343,7 @@ def home():
 
 @app.route("/api/health")
 def health():
-    return jsonify({"ok": True, "model": ACTIVE_MODEL, "key_configured": bool(GEMINI_API_KEY),
+    return jsonify({"ok": True, "model": ACTIVE_MODEL, "key_configured": bool(GOLDEN_SHUTTER_API_KEY),
                     "last_chat_error": LAST_ERROR,
                     "started_at": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(STARTED_AT)),
                     "uptime_minutes": round((time.time() - STARTED_AT) / 60, 1)})
@@ -354,11 +354,11 @@ def ai_test():
     """Open this link in the browser to see exactly why the AI works or not (no secrets are shown)."""
     if _rate_limited(_client_ip()):
         return jsonify({"working": False, "problem": "Too many tests. Wait a minute."}), 429
-    info = {"key_set": bool(GEMINI_API_KEY),
-            "key_starts_with": GEMINI_API_KEY[:3] if GEMINI_API_KEY else None,
-            "key_length": len(GEMINI_API_KEY), "model": ACTIVE_MODEL}
-    if not GEMINI_API_KEY:
-        info.update(working=False, problem="GEMINI_API_KEY is not set on this server. Add it in Render -> Environment and redeploy.")
+    info = {"key_set": bool(GOLDEN_SHUTTER_API_KEY),
+            "key_starts_with": GOLDEN_SHUTTER_API_KEY[:3] if GOLDEN_SHUTTER_API_KEY else None,
+            "key_length": len(GOLDEN_SHUTTER_API_KEY), "model": ACTIVE_MODEL}
+    if not GOLDEN_SHUTTER_API_KEY:
+        info.update(working=False, problem="GOLDEN_SHUTTER_API_KEY is not set on this server. Add it in Render -> Environment and redeploy.")
         return jsonify(info)
     try:
         info.update(working=True, reply=ask_gemini("What wedding packages do you have?"))
@@ -375,9 +375,9 @@ def _is_local():
 
 @app.route("/api/chat", methods=["POST"])
 def chat():
-    if not GEMINI_API_KEY:
-        return jsonify({"error": "Server is missing GEMINI_API_KEY.",
-                        "detail": "GEMINI_API_KEY is not set where you started app.py. Set it and restart."}), 500
+    if not GOLDEN_SHUTTER_API_KEY:
+        return jsonify({"error": "Server is missing GOLDEN_SHUTTER_API_KEY.",
+                        "detail": "GOLDEN_SHUTTER_API_KEY is not set where you started app.py. Set it and restart."}), 500
     if _rate_limited(_client_ip()):
         return jsonify({"error": "Too many messages. Please wait a minute."}), 429
     data = request.get_json(silent=True) or {}
@@ -406,20 +406,20 @@ def run_check():
     problems = [k for k, v in BUSINESS.items() if isinstance(v, str) and v.startswith("[Add")]
     if problems:
         print("\nTO FILL IN (still placeholders in BUSINESS):", ", ".join(problems))
-    print("\nAPI key set:", "YES" if GEMINI_API_KEY else "NO  (needed for 'test', 'chat' and the website)")
+    print("\nAPI key set:", "YES" if GOLDEN_SHUTTER_API_KEY else "NO  (needed for 'test', 'chat' and the website)")
     print("Model:", ACTIVE_MODEL)
     print("\nNext step:  python app.py test")
 
 
 def run_test():
     print("Testing your Gemini setup...\n")
-    if not GEMINI_API_KEY:
-        print("RESULT: GEMINI_API_KEY is NOT set in this window.")
-        print("  Windows CMD : set GEMINI_API_KEY=your_key      (no quotes, no spaces)")
-        print("  PowerShell  : $env:GEMINI_API_KEY=\"your_key\"")
-        print("  Render      : Dashboard -> your service -> Environment -> add GEMINI_API_KEY")
+    if not GOLDEN_SHUTTER_API_KEY:
+        print("RESULT: GOLDEN_SHUTTER_API_KEY is NOT set in this window.")
+        print("  Windows CMD : set GOLDEN_SHUTTER_API_KEY=your_key      (no quotes, no spaces)")
+        print("  PowerShell  : $env:GOLDEN_SHUTTER_API_KEY=\"your_key\"")
+        print("  Render      : Dashboard -> your service -> Environment -> add GOLDEN_SHUTTER_API_KEY")
         return
-    print(f"Key found: starts with '{GEMINI_API_KEY[:3]}...', length {len(GEMINI_API_KEY)}")
+    print(f"Key found: starts with '{GOLDEN_SHUTTER_API_KEY[:3]}...', length {len(GOLDEN_SHUTTER_API_KEY)}")
     print(f"Model    : {ACTIVE_MODEL}")
     try:
         reply = ask_gemini("What wedding packages do you have?")
@@ -431,8 +431,8 @@ def run_test():
 
 
 def run_terminal_chat():
-    if not GEMINI_API_KEY:
-        print("Set GEMINI_API_KEY first (see the top of this file).")
+    if not GOLDEN_SHUTTER_API_KEY:
+        print("Set GOLDEN_SHUTTER_API_KEY first (see the top of this file).")
         return
     print("Golden Shutter AI - terminal test. Type 'exit' to stop.\n")
     history = []
