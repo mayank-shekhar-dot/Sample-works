@@ -81,6 +81,15 @@ form{grid-template-columns:1fr}.assist .chat{position:fixed;z-index:60;right:12p
 .ad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.ad li{background:var(--bg);border:1px solid var(--bd);padding:12px;font-size:12px}.ad b{display:block;color:var(--gold);font-weight:500}.ad small{color:#999}
 .pm .pn{font-size:12px;color:#999;margin-top:14px}
 @media(max-width:900px){.pk,.ad{grid-template-columns:1fr}.pm-box{padding:30px 16px}}
+
+/* ===== Chat fix: input always visible and typeable ===== */
+#chat{display:flex;flex-direction:column;overflow:hidden;max-height:min(70vh,560px);max-height:min(70dvh,560px)}
+#chat .msgs{flex:1 1 auto;height:auto;min-height:110px;max-height:260px;overflow-y:auto}
+#chat .chips{flex:0 0 auto;max-height:84px;overflow-y:auto}
+#chat .cin{flex:0 0 auto;position:relative;z-index:2}
+#chat .cin input{font-size:16px;min-width:0;pointer-events:auto;-webkit-user-select:text;user-select:text}
+#csend{flex:0 0 42px;height:42px}
+@media(max-width:900px){#chat{right:12px;left:12px;width:auto;bottom:150px}}
 </style></head>
 <body>
 <header class="hdr"><a class="brand" href="#home"><b>GS</b><span>GOLDEN SHUTTER<small>PHOTOGRAPHY</small></span></a>
@@ -179,14 +188,18 @@ const close=()=>lb.hidden=true;$('#lbx').onclick=close;$('#lbp').onclick=()=>sho
 addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
 let sx=0;lb.ontouchstart=e=>sx=e.touches[0].clientX;lb.ontouchend=e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(cur+(d<0?1:-1))};
 const API='https://sample-works.onrender.com'; // CHANGED: backend URL (AI chat), no trailing slash
+fetch(API+'/api/health').catch(()=>{}); // CHANGED: wakes the free Render server when the page opens
 const msgs=$('#msgs'),cin=$('#cin'),chat=$('#chat');let hist=[],busy=false;
-$('#fab').onclick=()=>chat.classList.toggle('open');$('#chatX').onclick=()=>chat.classList.remove('open');
+$('#fab').onclick=()=>{chat.classList.toggle('open');if(chat.classList.contains('open'))setTimeout(()=>cin.focus(),60)};$('#chatX').onclick=()=>chat.classList.remove('open');
 function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;msgs.append(d);msgs.scrollTop=1e9;return d}
-async function ask(q){q=q.trim();if(!q||busy)return;busy=true;add(q,'me');cin.value='';const w=add('Typing…','bot');
-try{const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,history:hist.slice(-6)})}); // CHANGED: API+ added
+async function ask(q){q=q.trim();if(!q)return;if(busy){add('Please wait, the assistant is still answering…','bot');return}busy=true;add(q,'me');cin.value='';const w=add('Typing…','bot');
+const slow=setTimeout(()=>w.textContent='Assistant is waking up, please wait a few seconds…',8000);
+const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),90000);
+try{const r=await fetch(API+'/api/chat',{method:'POST',signal:ctl.signal,headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,history:hist.slice(-6)})});
 const j=await r.json();if(!r.ok)throw 0;w.textContent=j.reply;hist.push({role:'user',text:q},{role:'model',text:j.reply})}
-catch{w.textContent='The assistant is unavailable right now. Please use the enquiry form below and we will reply soon.';w.classList.add('err')}busy=false}
-$('#csend').onclick=()=>ask(cin.value);cin.onkeydown=e=>e.key==='Enter'&&ask(cin.value);
+catch{w.textContent='The assistant is unavailable right now. Please use the enquiry form below and we will reply soon.';w.classList.add('err')}
+clearTimeout(slow);clearTimeout(to);busy=false;cin.focus()}
+$('#csend').onclick=()=>ask(cin.value);cin.onkeydown=e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();ask(cin.value)}};
 $$('.chips button').forEach(b=>b.onclick=()=>ask(b.textContent));
 const f=$('#form'),st=$('#status'),sub=$('#sub');
 f.onsubmit=async e=>{e.preventDefault();if(sub.disabled)return;let bad=0;
@@ -197,7 +210,7 @@ try{const r=await fetch('/api/enquiry',{method:'POST',headers:{'Content-Type':'a
 if(!r.ok)throw 0;f.reset();st.className='w status ok';st.textContent='Enquiry received. This is not a confirmed booking — we will reply to confirm availability.'}
 catch{st.className='w status er';st.textContent='Could not send your enquiry. Please try again or contact us directly.'}sub.disabled=false};
 const hv=$('.hero-vid');if(hv){const hero=hv.parentElement,fit=()=>{hv.style.width=hero.offsetHeight+'px';hv.style.height=hero.offsetWidth+'px'};fit();new ResizeObserver(fit).observe(hero);if(matchMedia('(prefers-reduced-motion:reduce)').matches)hv.removeAttribute('autoplay'),hv.pause();else hv.play().catch(()=>{})}
-$$('[data-ai]').forEach(a=>a.onclick=e=>{e.preventDefault();chat.classList.add('open');nav.classList.remove('open')});
+$$('[data-ai]').forEach(a=>a.onclick=e=>{e.preventDefault();chat.classList.add('open');nav.classList.remove('open');setTimeout(()=>cin.focus(),60)});
 
 /* ===== Pricing popup ===== */
 const PK=(t,a)=>`<div class="pk">${a.map(p=>`<div><b>${p[0]}</b><div class="pr">${p[1]}</div>${p[2]?`<h4>Coverage</h4><ul>${p[2].map(x=>`<li>${x}</li>`).join('')}</ul>`:''}<h4>${p[2]?'Deliverables':'Includes'}</h4><ul>${p[3].map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div>`;
