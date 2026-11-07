@@ -178,11 +178,12 @@ function show(n){cur=(n+vis.length)%vis.length;li.style.opacity=0;setTimeout(()=
 const close=()=>lb.hidden=true;$('#lbx').onclick=close;$('#lbp').onclick=()=>show(cur-1);$('#lbn').onclick=()=>show(cur+1);
 addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur-1);if(e.key==='ArrowRight')show(cur+1)});
 let sx=0;lb.ontouchstart=e=>sx=e.touches[0].clientX;lb.ontouchend=e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(cur+(d<0?1:-1))};
+const API='https://sample-works.onrender.com'; // CHANGED: backend URL (AI chat), no trailing slash
 const msgs=$('#msgs'),cin=$('#cin'),chat=$('#chat');let hist=[],busy=false;
 $('#fab').onclick=()=>chat.classList.toggle('open');$('#chatX').onclick=()=>chat.classList.remove('open');
 function add(t,c){const d=document.createElement('div');d.className='m '+c;d.textContent=t;msgs.append(d);msgs.scrollTop=1e9;return d}
 async function ask(q){q=q.trim();if(!q||busy)return;busy=true;add(q,'me');cin.value='';const w=add('Typing…','bot');
-try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,history:hist.slice(-6)})});
+try{const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,history:hist.slice(-6)})}); // CHANGED: API+ added
 const j=await r.json();if(!r.ok)throw 0;w.textContent=j.reply;hist.push({role:'user',text:q},{role:'model',text:j.reply})}
 catch{w.textContent='The assistant is unavailable right now. Please use the enquiry form below and we will reply soon.';w.classList.add('err')}busy=false}
 $('#csend').onclick=()=>ask(cin.value);cin.onkeydown=e=>e.key==='Enter'&&ask(cin.value);
